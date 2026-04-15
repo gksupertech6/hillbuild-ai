@@ -1,162 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HillBuild AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HillBuild AI</title>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to right, #dfe9f3, #ffffff);
-        margin: 0;
-        padding: 0;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #dfe9f3, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
 
-    header {
-        background: #2c3e50;
-        color: white;
-        text-align: center;
-        padding: 20px;
-    }
+        header {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
-    .container {
-        width: 80%;
-        margin: auto;
-        margin-top: 20px;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px gray;
-    }
+        .container {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
 
-    h2 {
-        color: #2c3e50;
-    }
+        h2 {
+            color: #095bac;
+            font-family: cursive;
+        }
 
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+            font-family:
+                'Times New Roman', Times, serif;
+            font-size: large;
+        }
 
-    input, select {
-        width: 100%;
-        padding: 8px;
-        margin: 10px 0;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
+        input,
+        select {
 
-    button {
-        background: #27ae60;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 16px;
-    }
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-    button:hover {
-        background: #219150;
-    }
+        button {
+            background: #27ae60;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
 
-    .output {
-        margin-top: 20px;
-        padding: 15px;
-        background: #ecf0f1;
-        border-radius: 10px;
-    }
-</style>
+        h3 {
+            font-family: cursive;
+        }
+
+        button:hover {
+            background: darkmagenta;
+
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 10px;
+        }
+
+        p {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+        }
+
+        .design-image {
+            width: 60%;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🏡 HillBuild AI</h1>
-    <p>AI-Assisted Residential Design for Hill Stations</p>
-</header>
+    <header>
+        <h1>🏡 HillBuild AI</h1>
+        <p>AI-Assisted Residential Design for Hill Stations</p>
+    </header>
 
-<div class="container">
+    <div class="container">
 
-    <h2>Enter Site Details</h2>
+        <h2>Enter Site Details</h2>
 
-    <label>Slope Angle (°)</label>
-    <input type="number" id="slope">
+        <label>Slope Angle (°)</label>
+        <input type="number" id="slope"><br></br>
 
-    <label>Soil Type</label>
-    <select id="soil">
-        <option value="clay">Clay</option>
-        <option value="sandy">Sandy</option>
-        <option value="rocky">Rocky</option>
-    </select>
+        <label>Soil Type</label>
+        <select id="soil">
+            <option value="clay">Clay</option>
+            <option value="sandy">Sandy</option>
+            <option value="rocky">Rocky</option>
+        </select><br></br>
 
-    <label>Rainfall Level</label>
-    <select id="rainfall">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-    </select>
+        <label>Rainfall Level</label>
+        <select id="rainfall">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select><br></br>
 
-    <label>Plot Size (sq ft)</label>
-    <input type="number" id="plot">
+        <label>Plot Size (sq ft)</label>
 
-    <button onclick="generateDesign()">Generate Design</button>
+        <select id="plot">
+            <option value="select"></option>
+            <option value="600">600</option>
+            <option value="1200">1200</option>
 
-    <div class="output" id="result"></div>
+        </select>
+        <label>Number of floors</label>
+        <input type="number" id="floor"><br></br>
+        <button onclick="generateDesign()">Generate Design</button>
 
-</div>
+        <div class="output" id="result"></div>
 
-<script>
-function generateDesign() {
-    let slope = document.getElementById("slope").value;
-    let soil = document.getElementById("soil").value;
-    let rainfall = document.getElementById("rainfall").value;
 
-    let foundation = "";
-    let material = "";
-    let design = "";
-    let risk = "";
+    </div>
 
-    // Logic for slope
-    if (slope > 30) {
-        design = "Stilt / Stepped House";
-        foundation = "Deep pile foundation";
-    } else if (slope > 15) {
-        design = "Stepped foundation house";
-        foundation = "Reinforced concrete foundation";
-    } else {
-        design = "Normal structure";
-        foundation = "Shallow foundation";
-    }
+    <script>
+        function generateDesign() {
+            let slope = document.getElementById("slope").value;
+            let soil = document.getElementById("soil").value;
+            let rainfall = document.getElementById("rainfall").value;
+            let floor = document.getElementById("floor").value;
+            let size = document.getElementById("plot").value;
+            let image = ""
 
-    // Soil logic
-    if (soil === "clay") {
-        material = "Lightweight materials (wood, steel)";
-    } else if (soil === "sandy") {
-        material = "Reinforced concrete with strong base";
-    } else {
-        material = "Stone + concrete";
-    }
+            // Logic for slope
+            if (slope >= 30) {
+                design = "Stilt / Stepped House";
+                foundation = "Deep pile foundation";
 
-    // Rainfall logic
-    if (rainfall === "high") {
-        risk = "High landslide risk – Provide drainage & sloped roof";
-    } else if (rainfall === "medium") {
-        risk = "Moderate risk – Proper water management needed";
-    } else {
-        risk = "Low risk";
-    }
+            } else if (slope >= 15) {
+                design = "Stepped foundation house";
+                foundation = "Reinforced concrete foundation";
 
-    document.getElementById("result").innerHTML = `
+            } else {
+                design = "Normal structure";
+                foundation = "Shallow foundation";
+
+            }
+
+            // Soil logic
+            if (soil === "clay") {
+                material = "Lightweight materials (wood, steel)";
+            } else if (soil === "sandy") {
+                material = "Reinforced concrete with strong base";
+            } else {
+                material = "Stone + concrete";
+            }
+
+            // Rainfall logic
+            if (rainfall === "high") {
+                risk = "High landslide risk – Provide drainage & sloped roof";
+            } else if (rainfall === "medium") {
+                risk = "Moderate risk – Proper water management needed";
+            } else {
+                risk = "Low risk";
+            }
+            if (floor == 0 && size == 600) {
+                image = "img/ground.jpeg";
+            }
+            else if (floor == 1 && size == 1200) {
+                image = "img/12001.png";
+            }
+
+            document.getElementById("result").innerHTML = `
         <h3>🏠 Recommended Design</h3>
-        <p><b>Building Type:</b> ${design}</p>
-        <p><b>Foundation:</b> ${foundation}</p>
-        <p><b>Material:</b> ${material}</p>
-        <p><b>Risk Analysis:</b> ${risk}</p>
+        <p><b>Building Type</b><br></br>
+        ${design}</p>
+        <p><b>Foundation</b><br></br> ${foundation}</p>
+        <p><b>Material   <br></br> </b> ${material}</p>
+        <p><b>Risk Analysis <br></br> </b> ${risk}</p><br></br>
+        <p><b>2D and 3D design</b></p>
+        <img src="${image}" class="design-image">
     `;
-}
-</script>
+        }
+    </script>
 
 </body>
+
 </html>
