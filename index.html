@@ -129,7 +129,11 @@
 
         </select>
         <label>Number of floors</label>
-        <input type="number" id="floor"><br></br>
+        <select id="floor">
+            <option value="select"></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
         <button onclick="generateDesign()">Generate Design</button>
 
         <div class="output" id="result"></div>
